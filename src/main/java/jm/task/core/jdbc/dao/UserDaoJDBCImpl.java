@@ -13,6 +13,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
+    @Override
     public void createUsersTable() {
         try (Connection connection = Util.getMySQLConnection(); Statement statement = connection.createStatement()) {
             statement.executeUpdate("CREATE TABLE USERS (" +
@@ -24,6 +25,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public void dropUsersTable() {
         try (Connection connection = Util.getMySQLConnection(); Statement statement = connection.createStatement()) {
             statement.executeUpdate("DROP TABLE USERS");
@@ -31,6 +33,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public void saveUser(String name, String lastName, byte age) {
         try (Connection connection = Util.getMySQLConnection(); PreparedStatement preparedStatement =
                 connection.prepareStatement("INSERT INTO USERS (name, lastName, age) Values (?,?,?)");
@@ -43,6 +46,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public void removeUserById(long id) {
         try (Connection connection = Util.getMySQLConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE from USER where id = ?")) {
@@ -51,6 +55,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public List<User> getAllUsers() {
         List<User> result = new ArrayList<>();
         try (Connection connection = Util.getMySQLConnection();
@@ -69,6 +74,7 @@ public class UserDaoJDBCImpl implements UserDao {
         return result;
     }
 
+    @Override
     public void cleanUsersTable() {
         try (Connection connection = Util.getMySQLConnection(); Statement statement = connection.createStatement()) {
             statement.executeUpdate("TRUNCATE TABLE USERS");
